@@ -8,8 +8,12 @@ public class CharacterMovement : MonoBehaviour
     public float m_TurnSpeed = 180f;                        // How fast the tank turns (Left/Right, degrees per second)
 
     private Rigidbody m_RigidBody;
-    private float m_MovementInputValue;                     // The current value of the movement input
-    private float m_TurnInputValue;                         // The current value of the movement input
+    // private float m_MovementInputValue;                     // The current value of the movement input
+    // private float m_TurnInputValue;                         // The current value of the movement input
+
+    private Vector3 m_MovementDir;
+    private Vector3 movement;
+
 
     private void Awake()
     {
@@ -22,8 +26,9 @@ public class CharacterMovement : MonoBehaviour
         m_RigidBody.isKinematic = false;
 
         // Also reset the input values
-        m_MovementInputValue = 0f;
-        m_TurnInputValue = 0f;
+        // m_MovementInputValue = 0f;
+        // m_TurnInputValue = 0f;
+        m_MovementDir = Vector3.zero;
     }
 
     private void OnDisable()
@@ -36,35 +41,31 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_MovementInputValue = Input.GetAxis("Vertical");
-        m_TurnInputValue = Input.GetAxis("Horizontal");
+        // m_MovementInputValue = Input.GetAxis("Vertical");
+        // m_TurnInputValue = Input.GetAxis("Horizontal");
+
+        m_MovementDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
     }
 
     private void FixedUpdate()
     {
         Move();
-        Turn();
     }
 
     private void Move()
     {
+        float MoveX = m_MovementDir.x * m_Speed;
+        float MoveZ = m_MovementDir.z * m_Speed;
+
+        movement = new Vector3(MoveX, 0, MoveZ);
+
         // Create a vector in the direction the player is facing with a magnitude based on the input, speed and time between frames
-        Vector3 movement = transform.forward * m_MovementInputValue * m_Speed * Time.deltaTime;
+        //Vector3 movement = transform.position * m_MovementDir * m_Speed * Time.deltaTime;
 
         // Apply this movement to the rigidbody's position
-        m_RigidBody.MovePosition(m_RigidBody.position + movement);
+        m_RigidBody.MovePosition(transform.position + movement * Time.deltaTime);
     }
 
-    private void Turn()
-    {
-        // Determine the number of degrees to be turned based on the input, speed and time between frames
-        float turn = m_TurnInputValue * m_TurnSpeed * Time.deltaTime;
-
-        // Make this into a rotation on the y axis
-        Quaternion turnRotation = Quaternion.Euler(0f, turn, 0f);
-
-        // Apply this rotation to the rigidbody
-        m_RigidBody.MoveRotation(m_RigidBody.rotation * turnRotation);
-    }
+   
 }
