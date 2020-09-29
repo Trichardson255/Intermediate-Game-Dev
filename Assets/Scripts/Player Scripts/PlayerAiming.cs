@@ -4,10 +4,23 @@ using UnityEngine;
 
 public class PlayerAiming : MonoBehaviour
 {
+    LayerMask layerMask;
+
+    private void Awake()
+    {
+        layerMask = LayerMask.GetMask("Ground");
+    }
 
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(Input.mousePosition, Vector3.up);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+        {
+            transform.LookAt(hit.point);
+        }
     }
 }
