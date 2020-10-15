@@ -26,6 +26,8 @@ public class Health : MonoBehaviour
 
         // Disable the prefab so it can be activated when required (on death)
         // m_ExplosionParticles.gameObject.SetActive(false);
+
+        manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
     }
 
     private void OnEnable()

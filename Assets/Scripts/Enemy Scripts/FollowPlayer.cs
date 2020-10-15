@@ -1,17 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 public class FollowPlayer : MonoBehaviour {
 
     public Transform follow;
 
-    UnityEngine.AI.NavMeshAgent agent;
+    NavMeshAgent agent;
     float timer = 0;
 
 	// Use this for initialization
 	void Start () {
-	    agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+	    agent = GetComponent<NavMeshAgent>();
+        follow = GameObject.FindGameObjectWithTag("Player").transform;
 	}
 	
 	// Update is called once per frame

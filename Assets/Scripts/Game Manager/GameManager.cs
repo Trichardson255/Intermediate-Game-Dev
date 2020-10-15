@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     private int enemySpawnAmount = 0;
     private int enemiesKilled = 0;
 
+    private int enemiesSpawned = 0;
+
     private float m_GameTime = 0f;
     public float GameTime { get { return m_GameTime; } }
 
@@ -50,9 +52,10 @@ public class GameManager : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        for (int i =0; i < 5; i++)
+        for (int i =0; i < spawners.Length; i++)
         {
             Instantiate(enemy, spawners[i].transform.position, spawners[i].transform.rotation);
+            enemiesSpawned++;
         }
         
     }
@@ -69,12 +72,7 @@ public class GameManager : MonoBehaviour
         waveNumber = 1;
         enemySpawnAmount = 5;
         enemiesKilled = 0;
-
-
-        for (int i = 0; i < enemySpawnAmount; i++)
-        {
-            SpawnEnemy();
-        }
+        SpawnEnemy();
     }
 
     private void NextWave()
@@ -88,11 +86,8 @@ public class GameManager : MonoBehaviour
             waveNumber++;
             enemySpawnAmount = 5;
             enemiesKilled = 0;
-
-            for (int i = 0; i < enemySpawnAmount; i++)
-            {
-                SpawnEnemy();
-            }
+            enemiesSpawned = 0;
+            SpawnEnemy();
         }
     }
 
@@ -100,7 +95,7 @@ public class GameManager : MonoBehaviour
     {
         enemiesKilled++;
 
-        if (enemiesKilled == enemySpawnAmount)
+        if (enemiesKilled == enemiesSpawned)
         {
             NextWave();
         }
