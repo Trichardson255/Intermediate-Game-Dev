@@ -16,6 +16,9 @@ GameObject:
   - component: {fileID: 2935178230745223940}
   - component: {fileID: 2935178230745223997}
   - component: {fileID: 2935178230745223998}
+  - component: {fileID: 6235906820534143062}
+  - component: {fileID: 2673135488252944245}
+  - component: {fileID: 72841326}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -145,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3506750f786eb254a909c021e834b878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  follow: {fileID: 0}
+  follow: {fileID: 4776922707230309968, guid: 8a03178ec9ab7b14b84377a497cbf07b, type: 3}
 --- !u!54 &2935178230745223998
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -160,5 +163,46 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6235906820534143062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2935178230745223941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09c5b65dad3ba7e47987eedf9c9983a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StartingHealth: 100
+--- !u!114 &2673135488252944245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2935178230745223941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07ad4da877e79044dbb554b1b1eb1cbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCooldown: 2
+  lastAttackTime: 0
+  damage: 10
+--- !u!114 &72841326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2935178230745223941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09c5b65dad3ba7e47987eedf9c9983a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StartingHealth: 100

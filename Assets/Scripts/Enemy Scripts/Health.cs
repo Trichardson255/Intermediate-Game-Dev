@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TankHealth : MonoBehaviour
+public class Health : MonoBehaviour
 {
+    GameManager manager;
+
+
     // The amount of health each tank starts with
     public float m_StartingHealth = 100f;
     // Prefab that gets spawned on Awake and plays when tank dies
@@ -69,5 +72,7 @@ public class TankHealth : MonoBehaviour
 
         // Turn the tank off
         gameObject.SetActive(false);
+
+        manager.EnemyDie();
     }
 }

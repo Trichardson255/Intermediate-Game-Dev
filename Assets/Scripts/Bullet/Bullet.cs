@@ -13,6 +13,8 @@ public class Bullet : MonoBehaviour
     // The amount of force added to a tank at the centre of an explosion
     public float m_ExplosionForce = 100f;
 
+    public float damage = 25f;
+
     // A reference to the particles that will play on explosion --- CHANGE TO BULLET PARTICLES
     // public ParticleSystem m_ExplosionParticles;
 
@@ -31,11 +33,8 @@ public class Bullet : MonoBehaviour
         // Only tanks have rigidbody scripts
         if (targetRigidbody != null)
         {
-            // Add an explosion force
-            targetRigidbody.AddExplosionForce(m_ExplosionForce, transform.position, m_ExplosionRadius);
-
             // Find the tankhealth script associated w/ rigidbody
-            TankHealth targetHealth = targetRigidbody.GetComponent<TankHealth>();
+            Health targetHealth = targetRigidbody.GetComponent<Health>();
 
             if (targetHealth != null)
             {
@@ -57,21 +56,12 @@ public class Bullet : MonoBehaviour
 
     private float CalculateDamage(Vector3 targetPosition)
     {
-        // Create a vector from the shell to the target
-        Vector3 explosionToTarget = targetPosition - transform.position;
-
-        // Calculate the distance from the shell to the target
-        float explosionDistance = explosionToTarget.magnitude;
-
-        // Calculate the proportion of the maximum distance (the explosion radius) the target is away
-        float relativeDistance = (m_ExplosionRadius - explosionDistance) / m_ExplosionRadius;
 
         // Calculate damage as this proportion of the maximum possible damage
-        float damage = relativeDistance * m_MaxDamage;
+        // float damage = relativeDistance * m_MaxDamage;
 
         // Make sure that minimum damage is always 0
-        damage = Mathf.Max(0f, damage);
-
+        // damage = Mathf.Max(0f, damage);
         return damage;
     }
 
